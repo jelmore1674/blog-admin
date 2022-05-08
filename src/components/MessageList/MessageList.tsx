@@ -1,6 +1,5 @@
 import DeleteIcon from '../icons/DeleteIcon';
 import MarkRead from '../icons/MarkRead';
-import { supabase } from '../../utils/supabase';
 
 interface Props {
 	messages: any[];
