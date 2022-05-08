@@ -19,14 +19,20 @@ function App() {
 	};
 
 	React.useEffect(() => {
+		const fetchUser = async () => {
+			const session = await supabase.auth.session();
+			session ? setUser(session.user!) : console.error(Error);
+		};
+		fetchUser();
+	});
+
+	React.useEffect(() => {
 		async function fetchData() {
 			const { data, error } = await supabase
 				.from('messages')
 				.select('*')
 				.order('created_at', { ascending: false });
 			data ? setMessages(data) : console.log(error);
-			const session = await supabase.auth.session();
-			session ? setUser(session.user!) : console.error(error);
 			setTimeout(() => {
 				setLoading(false);
 			}, 500);
